@@ -38,7 +38,14 @@ mzm0703 <- subset(mzm0703, gender != "na")
 c <- survdiff(Surv(days, status) ~ gender, data=mzm0703) 
 plot(survfit(Surv(days, status) ~ gender, data = mzm0703), xlab = "days", ylab = "fraction alive", lwd = c(2.5,2.5), col=c("red", "blue"), main="MZM-0703 F1 survival, p= 0.924")
 legend(200,.8, legend=c("females","males"), lwd=c(2.5,2.5), col=c("red", "blue"))
-c
+
+
+##### F2 c1 males vs females #######
+gphen <- read.csv(file="/Volumes/group_dv/personal/DValenzano/month-by-month/Jun2015/phenots.csv", header=T, sep=',')
+gphen <- subset(gphen, gphen$gender != "na")
+fitmf <- survfit(formula=Surv(days,status)~gender, data=gphen)
+plot(fitmf, xlim=c(0,500), ylab="Fraction survived", xlab="Time (days)", lwd=c(3,3), col=c(2:3), main="G-cross")
+legend(400,.9, legend=c("f", "m"), lwd=c(2.5,2.5), col=c(2:3))
 
 ###### SAVE WORKSPACE ######
 save.image("/Volumes/group_dv/personal/DValenzano/Feb2015/surv_01-Feb-2015.RData")
