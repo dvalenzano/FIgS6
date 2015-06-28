@@ -3,4 +3,5 @@ For FigureS6 C,D,E,F follow [surv_c1.R](https://github.com/dvalenzano/FIgS6/blob
 Figure S6H is generated with:
 <pre><code>c1h <- read.csv(file="/Volumes/group_dv/personal/DValenzano/month-by-month/Feb2015/cross1_het.csv", head=T, sep=',')
 plot(c1h$days, c1h$Het, xlab="days", ylab="heterozygosity", pch=16)
-</code></pre>
+</code></pre>  
+Figure S6I is generated with [peak_qtl_mf.R](https://github.com/dvalenzano/FIgS6/blob/master/peak_qtl_mf.R "peak_qtl_mf.R")
