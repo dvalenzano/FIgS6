@@ -1,0 +1,34 @@
+library(ggmap)
+#climate <- read.csv("/Volumes/group_dv/personal/DValenzano/month-by-month/Dec2014/KG_Rinput.csv", header=T)
+#climate.kg <- data.frame(climate$longitude, climate$latitude, climate$KG_numcode)
+#names(climate.kg)[1] <- paste("longitude") 
+#names(climate.kg)[2] <- paste("latitude")
+#names(climate.kg)[3] <- paste("KG")
+#names(climate.kg)
+
+grz <- c(lon=31.975708, lat=-21.7595)
+
+#### DEFINE A DATA FRAME WITH COORDINATES FOR THE COLLECTION LOCALITIES #####
+tk_lon <- c(31.6, 32.45, 32.28, 32.5)
+tk_lat <- c(-21.7, -23.3, -23.1, -24.6)
+tk_strain <- c("GRZ", "MZM0-703", "MZM-0403", "Soveia")
+tk_pools <- data.frame(tk_lon, tk_lat, tk_strain)
+#############################################################################
+
+
+##Stations distribution###
+grz.mapp <- get_map(location = grz, zoom=6, col="bw")
+ggmap(grz.mapp, extent = "panel", maprange=FALSE) %+% climate.kg +aes(x=longitude, y=latitude)+
+  #  geom_density2d()+
+  #  scale_fill_gradient(low="blue", high="red")+
+  #  scale_alpha(range = c(0.0, 0.5), guide=FALSE)+
+  #  theme(legend.position = "none", axis.title = element_blank(), text = element_text(size = 12))+
+  #  geom_point(data = climate.kg, mapping = aes(longitude, latitude, colour=KG), 
+  #             size=6, alpha=0.8, shape=20) + 
+  #  scale_colour_gradient(low = 'blue', high = 'red')+
+  geom_point(aes(x = tk_lon, y = tk_lat, colour=tk_strain), data = tk_pools, 
+             alpha = .8, colour="black", size=4, shape=20)+
+  annotate('text', x=32.2,y=-21.64, label="GRZ", size = 5, col="black", alpha=1) +
+  annotate('text', x=33.65,y=-23.35, label="MZM-0703", size = 5, col="black", alpha=1)+
+  annotate('text', x=33.4,y=-22.93, label="MZM-0403", size = 5, col="black", alpha=1)+
+  annotate('text', x=33.24,y=-24.6, label="Soveia", size = 5, col="black", alpha=1) 
